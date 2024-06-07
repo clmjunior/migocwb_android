@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    tools:context=".SignUpFragment">
+
+    <LinearLayout
+        android:id="@+id/linearContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/logo_img" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/vocal_extrabold"
+            android:gravity="center"
+            android:text="Cadastro"
+            android:textColor="@color/orange"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/inContainer1"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Nome"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Nome"
+                    android:text=""
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lastNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Sobrenome"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Sobrenome"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emailLabel"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:fontFamily="@font/vocal_bold"
+            android:text="E-mail"
+            android:textColor="#CEBD9B"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_background"
+            android:fontFamily="@font/vocal_bold"
+            android:inputType="text"
+            android:hint="E-mail"
+            android:textColor="@color/tan"
+            android:textColorHint="@color/tan"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:id="@+id/inContainer2"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/passLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Senha"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="textPassword"
+                    android:hint="Senha"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pass2Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Confirmar Senha"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/pass2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="textPassword"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inContainer3"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/cepLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="CEP"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/cep"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="CEP"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/numberLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Número"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Número"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inContainer4"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ufLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="UF"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/uf"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="UF"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/cityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Cidade"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Cidade"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inContainer5"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nbhLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Bairro"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/nbh"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Bairro"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/streetLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="-10dp"
+                    android:fontFamily="@font/vocal_bold"
+                    android:text="Rua"
+                    android:textColor="#CEBD9B"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/street"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_background"
+                    android:fontFamily="@font/vocal_bold"
+                    android:inputType="text"
+                    android:hint="Rua"
+                    android:textColor="@color/tan"
+                    android:textColorHint="@color/tan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCreateUser"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background_orange"
+            android:fontFamily="@font/vocal_bold"
+            android:gravity="center"
+            android:theme="@style/Theme.Migo"
+            android:text="Cadastrar"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vocal_bold"
+                android:text="Já possui uma conta? "
+                android:textColor="#CEBD9B" />
+
+            <TextView
+                android:id="@+id/goToLoginButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/vocal_bold"
+                android:text="Entrar"
+                android:textColor="@color/royal_purple" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
+

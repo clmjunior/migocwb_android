@@ -1,0 +1,562 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/topContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/modalTitleLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/vocal_extrabold"
+                    android:gravity="start"
+                    android:text="Novo Evento"
+                    android:textColor="@color/tan"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/closeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:onClick="closeFragment"
+                    android:padding="8dp"
+                    android:text="✕"
+                    android:textColor="@color/tan"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/tan" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="70dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/layout_image_selection"
+                    layout="@layout/layout_image_selection"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="-10dp"
+                android:fontFamily="@font/vocal_bold"
+                android:text="Título do Evento"
+                android:textColor="@color/tan"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/vocal_bold"
+                android:inputType="text"
+                android:textColor="@color/tan"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="-10dp"
+                android:fontFamily="@font/vocal_bold"
+                android:text="Descrição"
+                android:textColor="@color/tan"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/vocal_bold"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:textColor="@color/tan"
+                android:textSize="13sp"
+                android:gravity="top|start" />
+
+            <LinearLayout
+                android:id="@+id/inContainer1"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="117dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/isPromotionLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Promoção"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:id="@+id/isPromotion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/yes"
+                            style="@style/CustomRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:padding="5dp"
+                            android:text="Sim"
+                            android:textColor="@color/tan"
+                            android:fontFamily="@font/vocal_bold"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/no"
+                            style="@style/CustomRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:checked="true"
+                            android:padding="5dp"
+                            android:text="Não"
+                            android:textColor="@color/tan"
+                            android:fontFamily="@font/vocal_bold"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/promotionDescriptionLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Descrição da Promoção"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/promotionDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="textMultiLine"
+                        android:lines="5"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp"
+                        android:gravity="top|start" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inContainer2"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/timeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Horário"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/time"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="none"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dateLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Data"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="none"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inContainer3"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cepLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="CEP"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/cep"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/numberLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Número"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/number"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inContainer4"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ufLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="UF"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/uf"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cityLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Cidade"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inContainer5"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/nbhLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Bairro"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/nbh"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/streetLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:fontFamily="@font/vocal_bold"
+                        android:text="Rua"
+                        android:textColor="@color/tan"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/street"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_background"
+                        android:fontFamily="@font/vocal_bold"
+                        android:inputType="text"
+                        android:textColor="@color/tan"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPublish"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background_green"
+                android:fontFamily="@font/vocal_bold"
+                android:gravity="center"
+                android:layout_marginBottom="25dp"
+                android:text="Publicar Evento"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+

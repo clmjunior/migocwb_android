@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--    PALETA MIGOCWB     -->
+    <color name="misty_rose">#F5F5EE</color>
+    <color name="beige">#F5F5DC</color>
+    <color name="tan">#D2B48C</color>
+    <color name="royal_purple">#573C90</color>
+    <color name="tomato_red">#FF5037</color>
+    <color name="light_background">#FAFAFA</color>
+    <color name="orange">#D55956</color>
+    <color name="green">#178754</color>
+
+
+    <!-- PALETA MIGOCWB (Tema Escuro) -->
+    <color name="misty_rose_dark">#353532</color>
+    <color name="beige_dark">#4E4E42</color>
+    <color name="tan_dark">#8B6D3E</color>
+    <color name="royal_purple_dark">#3E2B5C</color>
+    <color name="tomato_red_dark">#751D16</color>
+    <color name="dark_background">#20190E</color>
+    <color name="orange_dark">#6E3D17</color>
+    <color name="green_dark">#0D5038</color>
+
+
+</resources>

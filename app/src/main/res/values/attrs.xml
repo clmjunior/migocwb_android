@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorMistyRose" format="color"/>
+    <attr name="colorBeige" format="color"/>
+    <attr name="colorTan" format="color"/>
+    <attr name="colorRoyalPurple" format="color"/>
+    <attr name="colorTomatoRed" format="color"/>
+    <attr name="colorLightBackground" format="color"/>
+    <attr name="colorOrange" format="color"/>
+    <attr name="colorGreen" format="color"/>
+
+    <!-- Atributos para a paleta MIGOCWB (Tema Escuro) -->
+    <attr name="colorMistyRoseDark" format="color"/>
+    <attr name="colorBeigeDark" format="color"/>
+    <attr name="colorTanDark" format="color"/>
+    <attr name="colorRoyalPurpleDark" format="color"/>
+    <attr name="colorTomatoRedDark" format="color"/>
+    <attr name="colorDarkBackground" format="color"/>
+    <attr name="colorOrangeDark" format="color"/>
+    <attr name="colorGreenDark" format="color"/>
+</resources>

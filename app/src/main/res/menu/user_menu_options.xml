@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_edit_profile"
+        android:title="Editar Perfil" />
+    <item
+        android:id="@+id/menu_promote_event"
+        android:title="Promover Evento" />
+    <item
+        android:id="@+id/menu_my_events"
+        android:title="Meus Eventos" />
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Sair" />
+</menu>

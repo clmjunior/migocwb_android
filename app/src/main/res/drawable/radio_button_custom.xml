@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- Outer Circle with Border -->
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="15dp" android:height="15dp"/>
+                    <solid android:color="@android:color/white"/>
+                    <stroke android:width="2dp" android:color="@color/tan"/>
+                </shape>
+            </item>
+            <!-- Inner Filled Circle -->
+            <item android:gravity="center">
+                <shape android:shape="oval">
+                    <size android:width="8dp" android:height="8dp"/>
+                    <solid android:color="@color/tan"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_checked="false">
+        <shape android:shape="oval">
+            <size android:width="15dp" android:height="15dp"/>
+            <solid android:color="@android:color/transparent"/>
+            <stroke android:width="2dp" android:color="@color/tan"/>
+        </shape>
+    </item>
+</selector>
