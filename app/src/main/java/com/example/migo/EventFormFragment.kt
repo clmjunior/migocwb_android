@@ -10,6 +10,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,16 +23,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.migo.databinding.FragmentEventFormBinding
 import java.util.Calendar
+import androidx.appcompat.app.AppCompatActivity
+import java.io.InputStream
 
 class EventFormFragment : Fragment() {
 
     private var _binding: FragmentEventFormBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var timeEditText: EditText
     private lateinit var dateEditText: EditText
-
+    private lateinit var sqLitehelper: SQLitehelper
     private val REQUEST_CODE_SELECT_IMAGE = 100
+    private val SELECT_IMAGE_REQUEST_CODE = 1
+    private var base64ImageString: String? = null
+
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -44,13 +50,14 @@ class EventFormFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEventFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sqLitehelper = SQLitehelper(requireContext())
 
         val imageSelectionLayout = binding.layoutImageSelection.root
         imageSelectionLayout.setOnClickListener {
@@ -86,7 +93,7 @@ class EventFormFragment : Fragment() {
         timeEditText.setOnClickListener { showTimePickerDialog() }
         dateEditText.setOnClickListener { showDatePickerDialog() }
 
-        binding.btnPublish.setOnClickListener{ createEvent() }
+        binding.btnPublish.setOnClickListener { createEvent() }
     }
 
     private fun showTimePickerDialog() {
@@ -131,48 +138,91 @@ class EventFormFragment : Fragment() {
                 imageView.setImageURI(selectedImageUri)
                 imageView.visibility = View.VISIBLE
                 placeholderLayout.visibility = View.GONE
+
+                base64ImageString = convertImageToBase64(selectedImageUri)
             }
+        }
+    }
+
+
+    private fun convertImageToBase64(imageUri: Uri): String {
+        val inputStream: InputStream? = requireContext().contentResolver.openInputStream(imageUri)
+        val bytes = inputStream?.readBytes()
+        inputStream?.close()
+
+        return if (bytes != null) {
+            Base64.encodeToString(bytes, Base64.DEFAULT)
+        } else {
+            ""
         }
     }
 
     private fun createEvent() {
-        val name = binding.name.text.toString()
-        val lastName = binding.lastName.text.toString()
-        val email = binding.email.text.toString()
-        val password = binding.pass.text.toString()
-        val confirmPassword = binding.pass2.text.toString()
-        val cep = binding.cep.text.toString()
-        val number = binding.number.text.toString()
-        val uf = binding.uf.text.toString()
-        val city = binding.city.text.toString()
-        val neighborhood = binding.nbh.text.toString()
-        val street = binding.street.text.toString()
+        val sharedPreferences = requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
+        val userIdString = sharedPreferences.getString("userId", null)
 
-        if (password == confirmPassword) {
-            val user = User(
-                name = name,
-                last_name = lastName,
-                email = email,
-                password = password,
+        val userId: Int? = userIdString?.toIntOrNull()
+
+        if (userId != null && base64ImageString != null) {
+            val titulo = binding.title.text.toString()
+            val imagem = base64ImageString
+            val descricao = binding.description.text.toString()
+            val flagAtivo = "S"
+            val flagPromocao = binding.isPromotion.toString()
+            val descPromocao = binding.promotionDescription.text.toString()
+            val horario = binding.time.text.toString()
+            val data = binding.date.text.toString()
+            val cep = binding.cep.text.toString()
+            val cidade = binding.city.text.toString()
+            val uf = binding.uf.text.toString()
+            val rua = binding.street.text.toString()
+            val numeroString = binding.number.text.toString()
+            val bairro = binding.nbh.text.toString()
+
+            var numero: Int? = null
+            try {
+                numero = numeroString.toInt()
+                if (numero < 0) {
+                    throw NumberFormatException("O número não pode ser negativo")
+                }
+            } catch (e: NumberFormatException) {
+                Toast.makeText(context, "Por favor, insira um número válido", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            val event = Event(
+                userId = userId,
+                titulo = titulo,
+                imagem = imagem!!,
+                descricao = descricao,
+                flagAtivo = flagAtivo,
+                flagPromocao = flagPromocao,
+                descPromocao = descPromocao,
+                horario = horario,
+                data = data,
                 cep = cep,
-                number = number,
+                cidade = cidade,
                 uf = uf,
-                city = city,
-                neighborhood = neighborhood,
-                street = street
+                rua = rua,
+                numero = numero,
+                bairro = bairro
             )
-            val status = sqLitehelper.createUser(user)
+
+            val status = sqLitehelper.createEvent(event)
 
             if (status > -1) {
                 Toast.makeText(requireContext(), "Adicionado com sucesso", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_eventFormFragment_to_homeFragment)
             } else {
+                Log.e("CreateEvent", "Erro ao salvar o evento no banco de dados")
                 Toast.makeText(requireContext(), "Não Salvo", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(requireContext(), "As senhas não condizem", Toast.LENGTH_SHORT).show()
+            Log.d("CreateEvent", "userId ou base64ImageString é nulo")
+            Toast.makeText(context, "Usuário não está logado ou ID inválido ou imagem não selecionada", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

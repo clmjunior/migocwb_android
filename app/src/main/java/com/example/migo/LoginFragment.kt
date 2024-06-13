@@ -1,6 +1,7 @@
 package com.example.migo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -62,14 +63,15 @@ class LoginFragment : Fragment() {
             return
         }
 
-        val userExists = sqLitehelper.findUser(sEmail, sPassword)
+        val userId = sqLitehelper.findUser(sEmail, sPassword)
 
-        if (userExists) {
+        if (userId != null) {
             Toast.makeText(requireContext(), "Usuario encontrado", Toast.LENGTH_LONG).show()
             val sharedPref = requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
 
             with(sharedPref.edit()) {
                 putBoolean("loggedIn", true)
+                putString("userId", userId)
                 apply()
             }
 

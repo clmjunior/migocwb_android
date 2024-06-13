@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -43,7 +44,10 @@ class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 ")")
 
         db?.execSQL(createUsersTable)
+        Log.d("SQLiteHelper", "Tabela USERS criada com sucesso")
+
         db?.execSQL(createEventsTable)
+        Log.d("SQLiteHelper", "Tabela EVENTS criada com sucesso")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -51,6 +55,32 @@ class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db?.execSQL("DROP TABLE IF EXISTS EVENTS")
         onCreate(db)
     }
+
+    fun findUser(email: String, password: String): String? {
+        val db = this.readableDatabase
+        val query = "SELECT ID FROM USERS WHERE email = ? AND password = ?"
+        Log.d("FindUser", "Query: $query, Email: $email, Password: $password")
+        val cursor = db.rawQuery(query, arrayOf(email, password))
+
+        var userId: String? = null
+        if (cursor.moveToFirst()) {
+            val columnNames = cursor.columnNames
+            Log.d("FindUser", "Column names: ${columnNames.joinToString()}")
+            Log.d("FindUser", "Cursor move to first: true")
+            val idColumnIndex = cursor.getColumnIndex("ID")
+            if (idColumnIndex != -1) {
+                userId = cursor.getString(idColumnIndex)
+                Log.d("FindUser", "UserId found: $userId")
+            } else {
+                Log.e("FindUser", "Column index for 'ID' not found")
+            }
+        } else {
+            Log.d("FindUser", "Cursor move to first: false")
+        }
+        cursor.close()
+        return userId
+    }
+
 
     fun createUser(user: User): Long {
         val db = this.writableDatabase
@@ -100,6 +130,6 @@ class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     companion object {
         private const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "migocwb.db"
+        private const val DATABASE_NAME = "migo.db"
     }
 }

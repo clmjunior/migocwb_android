@@ -10,9 +10,7 @@
         <item name="colorLightBackground">@color/light_background</item>
         <item name="colorOrange">@color/orange</item>
         <item name="colorGreen">@color/green</item>
-
-         <item name="colorPrimary">@color/green</item>
-
+        <item name="fontColor">@color/black</item>
 
         <!-- Fullscreen settings -->
         <item name="android:windowFullscreen">true</item>
@@ -20,5 +18,10 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="TEXTCOLOR">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="Theme.Migo" parent="Base.Theme.Migo" />
+
 </resources>
