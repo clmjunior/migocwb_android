@@ -1,7 +1,6 @@
 // HomeFragment.kt
 package com.example.migo
 
-import EventAdapter
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,9 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.migo.Event
-import com.example.migo.R
-import com.example.migo.SQLitehelper
 import com.example.migo.databinding.FragmentHomeBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var eventAdapter: EventAdapter
     private var loggedInUserId: Int = 0
+    private lateinit var sqLitehelper: SQLitehelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +40,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (!sharedPreferences.getBoolean("loggedIn", false)) {
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-            return
-        }
+        sharedPreferences = requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
+        sqLitehelper = SQLitehelper(requireContext()) // Inicialize o SQLitehelper aqui
 
-        eventAdapter = EventAdapter(emptyList(), loggedInUserId)
+        loggedInUserId = sharedPreferences.getString("userId", "0")?.toInt() ?: 0
+        eventAdapter = EventAdapter(emptyList(), loggedInUserId, sqLitehelper) // Passe o SQLitehelper para o EventAdapter
         binding.recyclerViewEvents.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = eventAdapter
@@ -130,7 +126,7 @@ class HomeFragment : Fragment() {
                     true
                 }
                 R.id.menu_my_events -> {
-                    // Open my events fragment
+                    findNavController().navigate(R.id.action_homeFragment_to_myEventsFragment)
                     true
                 }
                 R.id.menu_logout -> {

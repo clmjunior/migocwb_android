@@ -196,6 +196,50 @@ class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return rowsAffected
     }
 
+    fun reactivateEvent(eventId: Int): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put("FLAG_ATIVO", "S")
+
+        val rowsAffected = db.update("EVENTS", values, "ID = ?", arrayOf(eventId.toString()))
+        db.close()
+        return rowsAffected
+    }
+
+    fun getEventsByUserId(userId: Int): List<Event> {
+        val events = mutableListOf<Event>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM EVENTS WHERE USER_ID = ?", arrayOf(userId.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val event = Event(
+                    id = cursor.getIntSafe("ID"),
+                    userId = cursor.getIntSafe("USER_ID"),
+                    titulo = cursor.getStringSafe("TITULO"),
+                    imagem = cursor.getStringSafe("IMAGEM"),
+                    descricao = cursor.getStringSafe("DESCRICAO"),
+                    flagAtivo = cursor.getStringSafe("FLAG_ATIVO"),
+                    flagPromocao = cursor.getStringSafe("FLAG_PROMOCAO"),
+                    descPromocao = cursor.getStringSafe("DESC_PROMOCAO"),
+                    horario = cursor.getStringSafe("HORARIO"),
+                    data = cursor.getStringSafe("DATA"),
+                    cep = cursor.getStringSafe("CEP"),
+                    cidade = cursor.getStringSafe("CIDADE"),
+                    uf = cursor.getStringSafe("UF"),
+                    rua = cursor.getStringSafe("RUA"),
+                    numero = cursor.getIntSafe("NUMERO"),
+                    bairro = cursor.getStringSafe("BAIRRO")
+                )
+                events.add(event)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return events
+    }
+
+
     fun Cursor.getStringSafe(columnName: String): String {
         val columnIndex = this.getColumnIndex(columnName)
         return if (columnIndex >= 0) this.getString(columnIndex) else ""

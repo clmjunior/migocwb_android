@@ -57,9 +57,15 @@ class EditEventFragment : Fragment() {
             binding.layoutImageSelection.placeholderLayout.visibility = View.GONE
         }
 
+        binding.closeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_editEventFragment_to_homeFragment)
+        }
+
         binding.btnPublish.setOnClickListener {
             updateEvent()
         }
+
+
     }
 
     private fun updateEvent() {

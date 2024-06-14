@@ -1,14 +1,20 @@
 package com.example.migo
 
+import ViaCepService
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.migo.databinding.FragmentSignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SignUpFragment : Fragment() {
 
@@ -37,7 +43,49 @@ class SignUpFragment : Fragment() {
         binding.btnCreateUser.setOnClickListener {
             createUser()
         }
+
+        binding.cep.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                fetchAddressFromCep(binding.cep.text.toString())
+            }
+        }
     }
+
+    fun fetchAddressFromCep(cep: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://viacep.com.br/ws/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(ViaCepService::class.java)
+        val call = service.getAddress(cep)
+
+        call.enqueue(object : Callback<Address> {
+            override fun onResponse(call: Call<Address>, response: Response<Address>) {
+                if (response.isSuccessful) {
+                    val address = response.body()
+                    if (address != null && !address.erro) {
+                        // Atualizar os campos do formulário com os dados do endereço
+                        binding.uf.setText(address.uf)
+                        binding.city.setText(address.localidade)
+                        binding.nbh.setText(address.bairro)
+                        binding.street.setText(address.logradouro)
+                        // Também pode ser necessário atualizar outros campos, conforme necessário
+                    } else {
+                        Log.e("Address", "CEP não encontrado ou inválido")
+                    }
+                } else {
+                    Log.e("Address", "Erro na requisição: ${response.code()} ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Address>, t: Throwable) {
+                Log.e("Address", "Erro na requisição: ${t.message}")
+            }
+        })
+    }
+
+
 
     private fun createUser() {
         val name = binding.name.text.toString()

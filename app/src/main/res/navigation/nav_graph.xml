@@ -65,6 +65,9 @@
             app:popEnterAnim="@anim/slide_in_up"
             app:popExitAnim="@anim/slide_in_up"
             />
+        <action
+            android:id="@+id/action_homeFragment_to_myEventsFragment"
+            app:destination="@id/myEventsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventFormFragment"
@@ -92,6 +95,14 @@
         <argument
             android:name="eventId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/myEventsFragment"
+        android:name="com.example.migo.MyEventsFragment"
+        android:label="MyEventsFragment" >
+        <action
+            android:id="@+id/action_myEventsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>
