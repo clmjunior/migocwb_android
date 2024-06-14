@@ -57,6 +57,14 @@
             app:exitAnim="@anim/slide_in_up"
             app:popEnterAnim="@anim/slide_in_up"
             app:popExitAnim="@anim/slide_in_up"  />
+        <action
+            android:id="@+id/action_homeFragment_to_editEventFragment"
+            app:destination="@id/editEventFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_in_up"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_in_up"
+            />
     </fragment>
     <fragment
         android:id="@+id/eventFormFragment"
@@ -70,4 +78,20 @@
             app:popEnterAnim="@anim/slide_out_up"
             app:popExitAnim="@anim/slide_out_up" />
     </fragment>
+    <fragment
+        android:id="@+id/editEventFragment"
+        android:name="com.example.migo.EditEventFragment"
+        android:label="EditEventFragment" >
+        <action
+            android:id="@+id/action_editEventFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_out_up"
+            app:exitAnim="@anim/slide_out_up"
+            app:popEnterAnim="@anim/slide_out_up"
+            app:popExitAnim="@anim/slide_out_up" />
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

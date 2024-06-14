@@ -9,6 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.migo.Event
 import com.example.migo.R
+import com.example.migo.SQLitehelper
+import android.widget.Toast
+import androidx.navigation.findNavController
+import com.example.migo.HomeFragmentDirections
+
 
 class EventAdapter(private var eventList: List<Event>, private val loggedInUserId: Int) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
@@ -49,11 +54,21 @@ class EventAdapter(private var eventList: List<Event>, private val loggedInUserI
         }
 
         holder.editButton.setOnClickListener {
-            // Implement the edit functionality
+            val action = HomeFragmentDirections.actionHomeFragmentToEditEventFragment(currentItem.id)
+            it.findNavController().navigate(action)
         }
 
         holder.deleteButton.setOnClickListener {
-            // Implement the delete functionality
+            val sqLitehelper = SQLitehelper(holder.itemView.context)
+            val rowsAffected = sqLitehelper.deactivateEvent(currentItem.id)
+            if (rowsAffected > 0) {
+                Toast.makeText(holder.itemView.context, "Evento excluído com sucesso", Toast.LENGTH_LONG).show()
+                // Atualizar a lista de eventos e notificar o adapter
+                eventList = eventList.filter { it.id != currentItem.id }
+                notifyDataSetChanged()
+            } else {
+                Toast.makeText(holder.itemView.context, "Erro ao excluir o evento", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

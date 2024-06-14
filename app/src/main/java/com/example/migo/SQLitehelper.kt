@@ -2,6 +2,7 @@ package com.example.migo
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -126,6 +127,83 @@ class SQLitehelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val status = db.insert("EVENTS", null, values)
         db.close()
         return status
+    }
+
+    fun updateEvent(event: Event): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put("TITULO", event.titulo)
+        values.put("DESCRICAO", event.descricao)
+        values.put("HORARIO", event.horario)
+        values.put("DATA", event.data)
+        values.put("DESC_PROMOCAO", event.descPromocao)
+        // Update other fields similarly
+
+        // Define the WHERE clause based on event ID
+        val whereClause = "ID = ?"
+        val whereArgs = arrayOf(event.id.toString())
+
+        // Perform the update operation
+        val rowsAffected = db.update("EVENTS", values, whereClause, whereArgs)
+
+        db.close()
+        return rowsAffected
+    }
+
+    fun getEventById(eventId: Int): Event? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM EVENTS WHERE ID = ?", arrayOf(eventId.toString()))
+
+        var event: Event? = null
+
+        if (cursor.moveToFirst()) {
+            val columnNames = cursor.columnNames
+            Log.d("SQLiteHelper", "Column names: ${columnNames.joinToString()}")
+
+            event = Event(
+                id = cursor.getIntSafe("ID"),
+                userId = cursor.getIntSafe("USER_ID"),
+                titulo = cursor.getStringSafe("TITULO"),
+                imagem = cursor.getStringSafe("IMAGEM"),
+                descricao = cursor.getStringSafe("DESCRICAO"),
+                flagAtivo = cursor.getStringSafe("FLAG_ATIVO"),
+                flagPromocao = cursor.getStringSafe("FLAG_PROMOCAO"),
+                descPromocao = cursor.getStringSafe("DESC_PROMOCAO"),
+                horario = cursor.getStringSafe("HORARIO"),
+                data = cursor.getStringSafe("DATA"),
+                cep = cursor.getStringSafe("CEP"),
+                cidade = cursor.getStringSafe("CIDADE"),
+                uf = cursor.getStringSafe("UF"),
+                rua = cursor.getStringSafe("RUA"),
+                numero = cursor.getIntSafe("NUMERO"),
+                bairro = cursor.getStringSafe("BAIRRO")
+            )
+        }
+
+        cursor.close()
+        db.close()
+        return event
+    }
+
+    fun deactivateEvent(eventId: Int): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put("FLAG_ATIVO", "N")
+
+        val rowsAffected = db.update("EVENTS", values, "ID = ?", arrayOf(eventId.toString()))
+        db.close()
+        return rowsAffected
+    }
+
+    fun Cursor.getStringSafe(columnName: String): String {
+        val columnIndex = this.getColumnIndex(columnName)
+        return if (columnIndex >= 0) this.getString(columnIndex) else ""
+    }
+
+    fun Cursor.getIntSafe(columnName: String): Int {
+        val columnIndex = this.getColumnIndex(columnName)
+        return if (columnIndex >= 0) this.getInt(columnIndex) else 0
     }
 
     companion object {
