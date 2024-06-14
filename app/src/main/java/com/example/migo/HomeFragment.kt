@@ -3,11 +3,13 @@ package com.example.migo
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,15 +26,12 @@ class HomeFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var eventAdapter: EventAdapter
-    private var loggedInUserId: Int = 0
     private lateinit var sqLitehelper: SQLitehelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        sharedPreferences = requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
-        loggedInUserId = sharedPreferences.getString("userId", "0")?.toInt() ?: 0
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,17 +40,48 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedPreferences = requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
-        sqLitehelper = SQLitehelper(requireContext()) // Inicialize o SQLitehelper aqui
+        sqLitehelper = SQLitehelper(requireContext())
 
-        loggedInUserId = sharedPreferences.getString("userId", "0")?.toInt() ?: 0
-        eventAdapter = EventAdapter(emptyList(), loggedInUserId, sqLitehelper) // Passe o SQLitehelper para o EventAdapter
+        setupRecyclerView()
+        setupThemeSwitch()
+        setupClickListeners()
+        loadEvents()
+    }
+
+    private fun setupRecyclerView() {
+        eventAdapter = EventAdapter(emptyList(), getUserId(), sqLitehelper)
         binding.recyclerViewEvents.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = eventAdapter
         }
+    }
 
-        loadEvents()
+    private fun setupThemeSwitch() {
+        val switchTheme = binding.switchTheme
 
+        // Define o estado inicial do switch com base no tema salvo
+        val isDarkMode = sharedPreferences.getBoolean("isDarkMode", false)
+        switchTheme.isChecked = isDarkMode
+
+        // Define o listener para o switch
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // Se o switch estiver ativado, define o tema para escuro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                saveThemeSelection(true)
+            } else {
+                // Se o switch estiver desativado, define o tema para claro (modo padrão)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                saveThemeSelection(false)
+            }
+        }
+    }
+
+    private fun saveThemeSelection(isDarkMode: Boolean) {
+        sharedPreferences.edit().putBoolean("isDarkMode", isDarkMode).apply()
+    }
+
+    private fun setupClickListeners() {
         binding.profileImg.setOnClickListener {
             showPopupMenu(it)
         }
@@ -112,15 +142,15 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getUserId(): Int {
+        return sharedPreferences.getString("userId", "0")?.toInt() ?: 0
+    }
+
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(requireContext(), view)
         popupMenu.menuInflater.inflate(R.menu.user_menu_options, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.menu_edit_profile -> {
-                    // Open profile edit fragment
-                    true
-                }
                 R.id.menu_promote_event -> {
                     findNavController().navigate(R.id.action_homeFragment_to_eventFormFragment)
                     true

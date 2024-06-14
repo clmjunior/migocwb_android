@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyEventsFragment"
-    android:background="@color/beige_background">
+    tools:context=".MyEventsFragment">
 
     <LinearLayout
         android:id="@+id/topMenu"
@@ -14,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/light_background"
+        android:background="?android:attr/colorPrimary"
         android:elevation="12dp">
 
         <ImageView
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
-        android:background="@color/light_background"
+        android:background="?android:attr/colorPrimary"
         android:elevation="12dp"
         android:layout_gravity="bottom">
 

@@ -26,6 +26,7 @@ class EventAdapter(
         val editButton: Button = itemView.findViewById(R.id.editButton)
         val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
         val reactivateButton: Button = itemView.findViewById(R.id.reactivateButton)
+        val addressTextView: TextView = itemView.findViewById((R.id.addressTextView))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -40,6 +41,10 @@ class EventAdapter(
 
         val dateTime = "Data: ${currentItem.data} às ${currentItem.horario}"
         holder.dateTimeTextView.text = dateTime
+
+        // Set the address text
+        val address = "${currentItem.rua}, ${currentItem.numero}, ${currentItem.bairro}, ${currentItem.cidade} - ${currentItem.uf}, CEP: ${currentItem.cep}"
+        holder.addressTextView.text = address
 
         // Decode the base64 string to a Bitmap and set it on the ImageView
         val imageBytes = Base64.decode(currentItem.imagem, Base64.DEFAULT)
@@ -97,6 +102,7 @@ class EventAdapter(
             }
         }
     }
+
 
     override fun getItemCount() = eventList.size
 

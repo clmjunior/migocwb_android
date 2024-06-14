@@ -1,27 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Migo" parent="Theme.AppCompat">
-        <!-- Customize your light theme here. -->
-        <item name="colorMistyRose">@color/misty_rose</item>
-        <item name="colorBeige">@color/beige</item>
-        <item name="colorTan">@color/tan</item>
-        <item name="colorRoyalPurple">@color/royal_purple</item>
-        <item name="colorTomatoRed">@color/tomato_red</item>
-        <item name="colorLightBackground">@color/light_background</item>
-        <item name="colorOrange">@color/orange</item>
-        <item name="colorGreen">@color/green</item>
-        <item name="fontColor">@color/black</item>
-
-        <!-- Fullscreen settings -->
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/beige_background</item>
+        <item name="colorPrimary">@color/light_background</item>
     </style>
-
-    <style name="TEXTCOLOR">
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="Theme.Migo" parent="Base.Theme.Migo" />
-
 </resources>

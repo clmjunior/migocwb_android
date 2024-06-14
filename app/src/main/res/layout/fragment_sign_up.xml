@@ -460,7 +460,6 @@
             android:background="@drawable/button_background_orange"
             android:fontFamily="@font/vocal_bold"
             android:gravity="center"
-            android:theme="@style/Theme.Migo"
             android:text="Cadastrar"
             android:textSize="15sp" />
 

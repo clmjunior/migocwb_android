@@ -6,7 +6,7 @@
     android:layout_height="600dp"
     android:layout_margin="30dp"
     app:cardCornerRadius="16dp"
-    app:cardBackgroundColor="@color/light_background">
+    android:background="?android:attr/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/tan"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
@@ -42,14 +42,14 @@
             android:id="@+id/descriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/tan"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="16dp"
             android:layout_gravity="center">
 
             <TextView
@@ -62,9 +62,17 @@
                 android:padding="8dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:layout_margin="0dp"
                 android:gravity="center"/>
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tan"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -18,12 +18,17 @@
     <!-- PALETA MIGOCWB (Tema Escuro) -->
     <color name="misty_rose_dark">#353532</color>
     <color name="beige_dark">#4E4E42</color>
-    <color name="tan_dark">#8B6D3E</color>
+    <color name="tan_dark">#978E82</color>
     <color name="royal_purple_dark">#3E2B5C</color>
     <color name="tomato_red_dark">#751D16</color>
-    <color name="dark_background">#20190E</color>
+    <color name="dark_background">#2E2414</color>
     <color name="orange_dark">#6E3D17</color>
     <color name="green_dark">#0D5038</color>
 
+
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
 
 </resources>
